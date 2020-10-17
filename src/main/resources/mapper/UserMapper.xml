@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace：命名空间，用于隔离sql，还有一个很重要的作用，后面会讲 -->
+<mapper namespace="com.lening.test1005a_dengxiaonan.mapper.UserMapper">
+    <select id="getUserPage" resultType="UserBean">
+        select * from tb_member
+        <include refid="usersql"></include>
+    </select>
+    <sql id="usersql">
+        <where>
+            <if test="mname!=null and mname!=''">
+                and mname like '%${mname}%'
+            </if>
+            <if test="aspoints!=null">
+                and spoints &gt;=#{aspoints}
+            </if>
+            <if test="bspoints!=null">
+                and spoints &lt;=#{bspoints}
+            </if>
+        </where>
+    </sql>
+    <delete id="deleteUserById" parameterType="UserBean">
+        DELETE  FROM  tb_member WHERE id = #{id}
+    </delete>
+    <select id="getUserByid" resultType="UserBean">
+        SELECT  * FROM   tb_member WHERE id = #{id}
+    </select>
+    <update id="updStu" parameterType="UserBean">
+          UPDATE tb_member SET mname=#{mname},spoints=#{spoints},abalance=#{abalance},address=#{address}
+        WHERE id = #{id}
+    </update>
+</mapper>
