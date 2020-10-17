@@ -24,7 +24,6 @@ public class Usercontroller {
         model.addAttribute("aspoints" , aspoints);
         model.addAttribute("bspoints" , bspoints);
         System.out.println(pageInfo);
-        System.out.println("dxnn ");
         return "user_list";
     }
     @RequestMapping("/deleteUserById")
